@@ -9,7 +9,7 @@
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/so_long",
-        "args": ["maps_err/badextension1.txt"],
+        "args": ["map/map.ber"],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],

@@ -6,7 +6,7 @@
 /*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:55:11 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/18 18:36:13 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/18 19:11:29 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,25 +76,27 @@ int	check_map(t_data *game)
 	return (0);
 }
 
-void	dfs_matrix(int col, int row, char **map)
+void	dfs_matrix(t_data *game, int col, int row)
 {
-	if (map[row][col] == '0')
-		map[row][col] = '2';
-	if (map[row][col] == 'C')
-		map[row][col] = 'c';
-	if (map[row][col] == 'E')
+	if (row < 0 || col < 0 || row >= game->row_num || col >= game->colls_num)
+        return;
+	if (game->map[row][col] == '0')
+		game->map[row][col] = '2';
+	if (game->map[row][col] == 'C')
+		game->map[row][col] = 'c';
+	if (game->map[row][col] == 'E')
 	{
-		map[row][col] = 'e';
+		game->map[row][col] = 'e';
 		return ;
 	}
-	if (is_valid_char(map[row][col + 1]))
-		dfs_matrix(col + 1, row, map);
-	if (is_valid_char(map[row][col - 1]))
-		dfs_matrix(col - 1, row, map);
-	if (is_valid_char(map[row + 1][col]))
-		dfs_matrix(col, row + 1, map);
-	if (is_valid_char(map[row - 1][col]))
-		dfs_matrix(col, row - 1, map);
+	if (is_valid_char(game->map[row][col + 1]))
+		dfs_matrix(game,col + 1, row);
+	if (is_valid_char(game->map[row][col - 1]))
+		dfs_matrix(game,col - 1, row);
+	if (is_valid_char(game->map[row + 1][col]))
+		dfs_matrix(game,col, row + 1);
+	if (is_valid_char(game->map[row - 1][col]))
+		dfs_matrix(game,col, row - 1);
 }
 
 int	valid_path(t_data *game)
@@ -103,14 +105,14 @@ int	valid_path(t_data *game)
 	int	col;
 
 	check_p_pos(game);
-	dfs_matrix(game->player_pos.col, game->player_pos.row, game->map);
+	dfs_matrix(game,game->player_pos.col, game->player_pos.row);
 	row = 0;
 	while (row < game->row_num)
 	{
 		col = 0;
 		while (game->map[row][col])
 		{
-			if (game->map[row][col] == 'C' || game->map[row][col] == 'E')
+			if (game->map[row][col] == 'C' || game->map[row][col] == 'E' || game->map[row][col] == '0')
 			{
 				ft_printf("Error!\nNo valid path in the map \n");
 				return (1);

@@ -6,7 +6,7 @@
 /*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:37:24 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/18 14:48:15 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/18 19:12:00 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			check_rectangle(t_data *game);
 void		count_elements(t_data *game);
 int			check_map(t_data *game);
 int			check_around_map(t_data *game);
-void		dfs_matrix(int x, int y, char **map);
+void		dfs_matrix(t_data *game, int col, int row);
 int			valid_path(t_data *game);
 int			check_char(t_data *game);
 void		check_p_pos(t_data *game);
