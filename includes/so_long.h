@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:37:24 by ehamm             #+#    #+#             */
-/*   Updated: 2024/03/29 14:53:42 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/18 12:05:54 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@
 # define PLAYER_PATH "./img/player.xpm"
 # define DOOR_PATH "./img/fish.xpm"
 
+typedef struct s_player_pos
+{
+	int	row;
+	int	col;
+}			t_player_pos;
+
 typedef struct s_data
 {
 	void	*mlx;
@@ -44,7 +50,6 @@ typedef struct s_data
 	int		moves;
 	int		x;
 	int		y;
-	int		player[2];
 	int		colls_num;
 	int		row_num;
 	int		player_position;
@@ -54,6 +59,7 @@ typedef struct s_data
 	void	*collectible_img;
 	void	*door_img;
 	void	*player_img;
+	t_player_pos	player_pos;
 }			t_data;
 
 // Graphics
@@ -72,7 +78,7 @@ int			check_around_map(t_data *game);
 void		dfs_matrix(int x, int y, char **map);
 int			valid_path(t_data *game);
 void		check_p_pos(t_data *game);
-void		check_ber(char *argv, t_data *game);
+int			check_ber(char *argv, t_data *game);
 
 // Moves and key hook
 int			key_hook(int keysym, t_data *game);
@@ -97,5 +103,8 @@ int			is_down(int key);
 int			is_left(int key);
 int			is_right(int key);
 int			is_valid(int key);
+
+//utils
+int ft_strstr(char *str, char *to_find);
 
 #endif
