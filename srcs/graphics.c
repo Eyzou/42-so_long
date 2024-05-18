@@ -6,7 +6,7 @@
 /*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 17:59:03 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/18 14:11:46 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/18 14:24:43 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,12 @@ int	init_map(char *map_path, t_data *game)
 	file = open(map_path, O_RDONLY);
 	if (file == -1)
 	{
-		ft_printf("Error!\nMap does not exist\n");
+		ft_printf("Error!\nMap is invalid\n");
 		return (1);
 	}
 	line = get_next_line(file);
 	if (line == NULL)
-		return (1);
+		return (error("Error\nThe map is empty\n"));
 	while (line)
 	{
 		free(line);

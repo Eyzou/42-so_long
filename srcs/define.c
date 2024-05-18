@@ -6,7 +6,7 @@
 /*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 16:26:31 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/17 16:17:08 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/18 15:41:09 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_right(int key)
 	return (key == XK_d || key == XK_D || key == XK_Right);
 }
 
-int	is_valid(int key)
+int	is_valid_char(int key)
 {
-	return (key == 'C' || key == 'E' || key == '0');
+	return (key == 'C' || key == 'E' || key == '0' || key == '1' || key == 'P');
 }

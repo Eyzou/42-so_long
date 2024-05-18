@@ -9,7 +9,7 @@
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/so_long",
-        "args": ["maps_err/no_valid_road13.ber"],
+        "args": ["maps_err/badextension1.txt"],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],

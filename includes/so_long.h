@@ -6,7 +6,7 @@
 /*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:37:24 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/18 12:05:54 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/18 14:48:15 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int			check_map(t_data *game);
 int			check_around_map(t_data *game);
 void		dfs_matrix(int x, int y, char **map);
 int			valid_path(t_data *game);
+int			check_char(t_data *game);
 void		check_p_pos(t_data *game);
 int			check_ber(char *argv, t_data *game);
 
@@ -102,7 +103,7 @@ int			is_up(int key);
 int			is_down(int key);
 int			is_left(int key);
 int			is_right(int key);
-int			is_valid(int key);
+int			is_valid_char(int key);
 
 //utils
 int ft_strstr(char *str, char *to_find);

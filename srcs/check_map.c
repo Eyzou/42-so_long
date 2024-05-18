@@ -6,7 +6,7 @@
 /*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:55:11 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/18 13:15:43 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/18 18:36:13 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ int	check_map(t_data *game)
 		ft_printf("Error!\nThe map should be surronded by trees-souches!\n");
 		return (1);
 	}
+	/*if (check_char(game) == 1)
+	{
+		ft_printf("Error!\nInvalid character in the map\n");
+		return (1);
+	}*/
 	if (check_elements(game) == 1)
 		return (1);
 	return (0);
@@ -82,13 +87,13 @@ void	dfs_matrix(int col, int row, char **map)
 		map[row][col] = 'e';
 		return ;
 	}
-	if (is_valid(map[row][col + 1]))
+	if (is_valid_char(map[row][col + 1]))
 		dfs_matrix(col + 1, row, map);
-	if (is_valid(map[row][col - 1]))
+	if (is_valid_char(map[row][col - 1]))
 		dfs_matrix(col - 1, row, map);
-	if (is_valid(map[row + 1][col]))
+	if (is_valid_char(map[row + 1][col]))
 		dfs_matrix(col, row + 1, map);
-	if (is_valid(map[row - 1][col]))
+	if (is_valid_char(map[row - 1][col]))
 		dfs_matrix(col, row - 1, map);
 }
 
@@ -119,27 +124,27 @@ int	valid_path(t_data *game)
 
 void	count_elements(t_data *game)
 {
-	int	i;
-	int	j;
+	int	row;
+	int	col;
 
 	game->collectible_num = 0;
 	game->player_num = 0;
 	game->exit_num = 0;
-	i = 0;
-	while (game->map[i])
+	row = 0;
+	while (game->map[row])
 	{
-		j = 1;
-		while (game->map[i][j])
+		col = 1;
+		while (game->map[row][col])
 		{
-			if (game->map[i][j] == 'C')
+			if (game->map[row][col] == 'C')
 				game->collectible_num++;
-			if (game->map[i][j] == 'P')
+			if (game->map[row][col] == 'P')
 				game->player_num++;
-			if (game->map[i][j] == 'E')
+			if (game->map[row][col] == 'E')
 				game->exit_num++;
-			j++;
+			col++;
 		}
-		i++;
+		row++;
 	}
 }
 
@@ -182,3 +187,23 @@ int check_ber(char *argv, t_data *game)
 	// besoin de corriger case quand .ber only
 	return (0);
 }
+
+/*int	check_char(t_data *game)
+{
+	int	col;
+	int	row;
+
+	row = 0;
+	while (game->map[row])
+	{
+		col = 0;
+		while (game->map[row][col] != '\0' && game->map[row][col] != '\n')
+		{
+			if (!is_valid_char(game->map[row][col]))
+				return (1);
+			col++;
+		}
+		row++;
+	}
+	return (0);
+}*/
