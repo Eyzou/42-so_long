@@ -6,11 +6,29 @@
 /*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 08:43:00 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/17 16:16:44 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/20 20:15:47 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	put_player(t_data *game, int col, int row)
+{
+	if (game->player_position == U)
+		mlx_put_image_to_window(game->mlx, game->win, game->player_img, col
+			* 32, row * 32);
+	else if (game->player_position == D)
+		mlx_put_image_to_window(game->mlx, game->win, game->player_img, col
+			* 32, row * 32);
+	else if (game->player_position == L)
+		mlx_put_image_to_window(game->mlx, game->win, game->player_img, col
+			* 32, row * 32);
+	else if (game->player_position == R)
+		mlx_put_image_to_window(game->mlx, game->win, game->player_img, col
+			* 32, row * 32);
+	game->x = col;
+	game->y = row;
+}
 
 void	door_locked_right_left(t_data *game, int door_row, int door_col)
 {
@@ -18,7 +36,7 @@ void	door_locked_right_left(t_data *game, int door_row, int door_col)
 	{
 		if (game->map[door_row][door_col + 1] == '1')
 			return ;
-		if (game->map[door_row][door_col + 1] == 'C')
+		if (game->map[door_row][door_col + 1] == 'C' || game->map[door_row][door_col + 1] == 'c')
 			game->score += 1;
 		game->map[door_row][door_col - 1] = '0';
 		game->map[door_row][door_col + 1] = 'P';
@@ -30,7 +48,7 @@ void	door_locked_right_left(t_data *game, int door_row, int door_col)
 	{
 		if (game->map[door_row][door_col - 1] == '1')
 			return ;
-		if (game->map[door_row][door_col - 1] == 'C')
+		if (game->map[door_row][door_col - 1] == 'C' ||	game->map[door_row][door_col - 1] == 'c')
 			game->score += 1;
 		game->map[door_row][door_col + 1] = '0';
 		game->map[door_row][door_col - 1] = 'P';
@@ -43,7 +61,7 @@ void	door_locked_right_left(t_data *game, int door_row, int door_col)
 void	move_top(t_data *game, int i, int j)
 {
 	game->player_position = U;
-	if (game->map[j + 1][i] == 'C')
+	if (game->map[j + 1][i] == 'C' || game->map[j + 1][i] == 'c')
 		game->score += 1;
 	else if (game->map[j + 1][i] == 'e' && game->collectible_num == game->score)
 	{
@@ -66,7 +84,7 @@ void	move_top(t_data *game, int i, int j)
 void	move_down(t_data *game, int i, int j)
 {
 	game->player_position = D;
-	if (game->map[j - 1][i] == 'C')
+	if (game->map[j - 1][i] == 'C' || game->map[j - 1][i] == 'c')
 		game->score += 1;
 	else if (game->map[j - 1][i] == 'e' && game->collectible_num == game->score)
 	{
@@ -89,7 +107,7 @@ void	move_down(t_data *game, int i, int j)
 void	move_left(t_data *game, int i, int j)
 {
 	game->player_position = L;
-	if (game->map[j][i - 1] == 'C')
+	if (game->map[j][i - 1] == 'C' || game->map[j][i - 1] == 'c')
 		game->score += 1;
 	else if (game->map[j][i - 1] == 'e' && game->collectible_num == game->score)
 	{
@@ -112,7 +130,7 @@ void	move_left(t_data *game, int i, int j)
 void	move_right(t_data *game, int i, int j)
 {
 	game->player_position = R;
-	if (game->map[j][i + 1] == 'C')
+	if (game->map[j][i + 1] == 'C' || game->map[j][i + 1] == 'c')
 		game->score += 1;
 	else if (game->map[j][i + 1] == 'e' && game->collectible_num == game->score)
 	{

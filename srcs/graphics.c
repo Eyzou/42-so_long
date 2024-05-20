@@ -6,7 +6,7 @@
 /*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 17:59:03 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/18 14:24:43 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/20 19:29:27 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,6 @@ void	print_map(char *line, t_data *game, int index)
 	}
 }
 
-void	put_player(t_data *game, int width, int height)
-{
-	if (game->player_position == U)
-		mlx_put_image_to_window(game->mlx, game->win, game->player_img, width
-			* 32, height * 32);
-	else if (game->player_position == D)
-		mlx_put_image_to_window(game->mlx, game->win, game->player_img, width
-			* 32, height * 32);
-	else if (game->player_position == L)
-		mlx_put_image_to_window(game->mlx, game->win, game->player_img, width
-			* 32, height * 32);
-	else if (game->player_position == R)
-		mlx_put_image_to_window(game->mlx, game->win, game->player_img, width
-			* 32, height * 32);
-	game->x = width;
-	game->y = height;
-}
 
 void	fill_map(t_data *game, int lines, char *map_path)
 {
@@ -76,7 +59,7 @@ void	fill_map(t_data *game, int lines, char *map_path)
 	i = 0;
 	file = open(map_path, O_RDWR);
 	game->moves = 1;
-	game->player_position = 0;
+	game->player_position = 1;
 	game->map = malloc(sizeof(char **) * (lines + 1));
 	game->map[0] = get_next_line(file);
 	while (i < lines)

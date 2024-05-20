@@ -6,7 +6,7 @@
 /*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:55:11 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/18 19:11:29 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/20 20:46:06 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ int check_ber(char *argv, t_data *game)
 	while (game->map[row])
 	{
 		col = 0;
-		while (game->map[row][col] != '\0' && game->map[row][col] != '\n')
+		while (game->map[row][col] != '\0' && game->map[row][col] != '\n' && col < game->colls_num)
 		{
 			if (!is_valid_char(game->map[row][col]))
 				return (1);

@@ -1,8 +1,0 @@
-{
-	"42header.username": "ehamm",
-	"42header.email": "marvin@42.fr",
-	"files.associations": {
-		"unistd.h": "c",
-		"stdio.h": "c"
-	}
-}

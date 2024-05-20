@@ -6,7 +6,7 @@
 /*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:15:41 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/17 17:26:34 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/20 20:14:17 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 		return (1);
 	set_images(game);
 	add_graphics(game);
-	mlx_key_hook(game->win, key_hook, game);
+	mlx_hook(game->win, KeyPress, KeyPressMask, key_hook, game);
 	mlx_hook(game->win, 17, 0, close_game, game);
 	mlx_loop(game->mlx);
 	return (0);

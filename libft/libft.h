@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:35:04 by ehamm             #+#    #+#             */
-/*   Updated: 2024/03/12 17:54:15 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/17 12:41:25 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5
+# endif
+
+# ifndef MAX_FD
+#  define MAX_FD 1024
 # endif
 
 # include <stdarg.h>
@@ -99,15 +103,11 @@ void				ft_putnbr_basep(unsigned long nb, char *base, int *count);
 void				ft_putnbr_basex(unsigned int nb, char *base, int *count);
 
 // ------------------ gnl -------------
-t_gnl				*ft_lstlastgnl(t_gnl *lst);
-void				dealloc(t_gnl **list, t_gnl *clean_node, char *buf);
+t_gnl				*ft_lst_lastgnl(t_gnl *lst);
 int					find_new_line(t_gnl *list);
 void				copy(t_gnl *list, char *dest);
 int					len_to_new_line(t_gnl *list);
-void				add_new_node(t_gnl **list, char *tmp);
-void				read_and_stock_line(t_gnl **list, int fd);
+void				free_list(t_gnl **list, t_gnl *new_node, char *buf);
 char				*get_next_line(int fd);
-char				*extract_from_list_to_line(t_gnl *list);
-void				polish_list(t_gnl **list);
 
 #endif

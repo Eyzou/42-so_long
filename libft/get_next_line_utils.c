@@ -6,13 +6,13 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:34:17 by ehamm             #+#    #+#             */
-/*   Updated: 2024/03/12 09:26:13 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/17 12:21:51 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_gnl	*ft_lstlastgnl(t_gnl *list)
+t_gnl	*ft_lst_lastgnl(t_gnl *list)
 {
 	if (list == NULL)
 		return (NULL);
@@ -21,26 +21,27 @@ t_gnl	*ft_lstlastgnl(t_gnl *list)
 	return (list);
 }
 
-void	dealloc(t_gnl **list, t_gnl *clean_node, char *buf)
+void	free_list(t_gnl **list, t_gnl *new_node, char *buf)
 {
 	t_gnl	*tmp;
 
-	if (NULL == *list)
+	if (*list == NULL)
 		return ;
+	tmp = *list;
 	while (*list)
 	{
 		tmp = (*list)->next;
 		free((*list)->content);
-		free(*list);
+		free((*list));
 		*list = tmp;
 	}
 	*list = NULL;
-	if (clean_node->content[0])
-		*list = clean_node;
+	if (new_node->content[0])
+		*list = new_node;
 	else
 	{
+		free(new_node);
 		free(buf);
-		free(clean_node);
 	}
 }
 
@@ -80,8 +81,7 @@ void	copy(t_gnl *list, char *dest)
 			if (list->content[i] == '\n')
 			{
 				dest[j++] = '\n';
-				dest[j] = '\0';
-				return ;
+				break ;
 			}
 			dest[j++] = list->content[i++];
 		}
