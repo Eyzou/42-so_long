@@ -6,7 +6,7 @@
 /*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:55:11 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/20 20:46:06 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/20 21:19:17 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	check_map(t_data *game)
 
 void	dfs_matrix(t_data *game, int col, int row)
 {
-	if (row < 0 || col < 0 || row >= game->row_num || col >= game->colls_num)
+	if (row < 0 || col < 0 || row >= game->row_num || col >= game->colls_num || row >= game->row_num)
         return;
 	if (game->map[row][col] == '0')
 		game->map[row][col] = '2';
