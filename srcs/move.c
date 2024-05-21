@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 08:43:00 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/20 20:15:47 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/21 14:11:26 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,38 +30,10 @@ void	put_player(t_data *game, int col, int row)
 	game->y = row;
 }
 
-void	door_locked_right_left(t_data *game, int door_row, int door_col)
-{
-	if (game->player_position == R)
-	{
-		if (game->map[door_row][door_col + 1] == '1')
-			return ;
-		if (game->map[door_row][door_col + 1] == 'C' || game->map[door_row][door_col + 1] == 'c')
-			game->score += 1;
-		game->map[door_row][door_col - 1] = '0';
-		game->map[door_row][door_col + 1] = 'P';
-		put_player(game, door_col + 1, door_row);
-		mlx_put_image_to_window(game->mlx, game->win, game->floor_img, (door_col
-				- 1) * 32, door_row * 32);
-	}
-	else if (game->player_position == L)
-	{
-		if (game->map[door_row][door_col - 1] == '1')
-			return ;
-		if (game->map[door_row][door_col - 1] == 'C' ||	game->map[door_row][door_col - 1] == 'c')
-			game->score += 1;
-		game->map[door_row][door_col + 1] = '0';
-		game->map[door_row][door_col - 1] = 'P';
-		put_player(game, door_col - 1, door_row);
-		mlx_put_image_to_window(game->mlx, game->win, game->floor_img, (door_col
-				+ 1) * 32, door_row * 32);
-	}
-}
-
 void	move_top(t_data *game, int i, int j)
 {
 	game->player_position = U;
-	if (game->map[j + 1][i] == 'C' || game->map[j + 1][i] == 'c')
+	if (game->map[j + 1][i] == 'c')
 		game->score += 1;
 	else if (game->map[j + 1][i] == 'e' && game->collectible_num == game->score)
 	{
@@ -84,7 +56,7 @@ void	move_top(t_data *game, int i, int j)
 void	move_down(t_data *game, int i, int j)
 {
 	game->player_position = D;
-	if (game->map[j - 1][i] == 'C' || game->map[j - 1][i] == 'c')
+	if (game->map[j - 1][i] == 'c')
 		game->score += 1;
 	else if (game->map[j - 1][i] == 'e' && game->collectible_num == game->score)
 	{
@@ -107,7 +79,7 @@ void	move_down(t_data *game, int i, int j)
 void	move_left(t_data *game, int i, int j)
 {
 	game->player_position = L;
-	if (game->map[j][i - 1] == 'C' || game->map[j][i - 1] == 'c')
+	if (game->map[j][i - 1] == 'c')
 		game->score += 1;
 	else if (game->map[j][i - 1] == 'e' && game->collectible_num == game->score)
 	{
@@ -130,7 +102,7 @@ void	move_left(t_data *game, int i, int j)
 void	move_right(t_data *game, int i, int j)
 {
 	game->player_position = R;
-	if (game->map[j][i + 1] == 'C' || game->map[j][i + 1] == 'c')
+	if (game->map[j][i + 1] == 'c')
 		game->score += 1;
 	else if (game->map[j][i + 1] == 'e' && game->collectible_num == game->score)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 11:18:26 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/18 12:48:22 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/21 10:11:36 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,32 @@ void	check_p_pos(t_data *game)
 			}
 			col++;
 		}
-				row++;
+		row++;
 	}
 }
 
+void	count_elements(t_data *game)
+{
+	int	row;
+	int	col;
+
+	game->collectible_num = 0;
+	game->player_num = 0;
+	game->exit_num = 0;
+	row = 0;
+	while (game->map[row])
+	{
+		col = 1;
+		while (game->map[row][col])
+		{
+			if (game->map[row][col] == 'C')
+				game->collectible_num++;
+			if (game->map[row][col] == 'P')
+				game->player_num++;
+			if (game->map[row][col] == 'E')
+				game->exit_num++;
+			col++;
+		}
+		row++;
+	}
+}

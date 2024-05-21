@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:37:24 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/18 19:12:00 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/21 14:25:38 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,80 +32,97 @@
 # define COLL_PATH "./img/carott.xpm"
 # define PLAYER_PATH "./img/player.xpm"
 # define DOOR_PATH "./img/fish.xpm"
+# define ENEMY_PATH "./img/monster"
+# define NUM_FRAMES 8
+
 
 typedef struct s_player_pos
 {
-	int	row;
-	int	col;
-}			t_player_pos;
+	int				row;
+	int				col;
+}					t_player_pos;
+
+typedef struct s_anim
+{
+	char 			*sprites[NUM_FRAMES];
+	int				last_time;
+	int				delay;
+	int				current_frame;
+}					t_anim;
+
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	int		score;
-	int		collectible_num;
-	int		exit_num;
-	int		player_num;
-	int		moves;
-	int		x;
-	int		y;
-	int		colls_num;
-	int		row_num;
-	int		player_position;
-	char	**map;
-	void	*wall_img;
-	void	*floor_img;
-	void	*collectible_img;
-	void	*door_img;
-	void	*player_img;
+	void			*mlx;
+	void			*win;
+	int				score;
+	int				collectible_num;
+	int				exit_num;
+	int				player_num;
+	int				moves;
+	int				x;
+	int				y;
+	int				colls_num;
+	int				row_num;
+	int				player_position;
+	char			**map;
+	void			*wall_img;
+	void			*floor_img;
+	void			*collectible_img;
+	void			*door_img;
+	void			*player_img;
 	t_player_pos	player_pos;
-}			t_data;
+	t_anim			*enemy;
+}					t_data;
 
 // Graphics
-int			init_map(char *map_path, t_data *game);
-void		fill_map(t_data *game, int lines, char *map_path);
-void		set_images(t_data *game);
-void		print_map(char *line, t_data *game, int index);
-void		add_graphics(t_data *game);
-void		put_player(t_data *game, int width, int height);
+int					init_map(char *map_path, t_data *game);
+void				fill_map(t_data *game, int lines, char *map_path);
+void				set_images(t_data *game);
+void				print_map(char *line, t_data *game, int index);
+void				add_graphics(t_data *game);
+void				put_player(t_data *game, int width, int height);
 
 // check map
-int			check_rectangle(t_data *game);
-void		count_elements(t_data *game);
-int			check_map(t_data *game);
-int			check_around_map(t_data *game);
-void		dfs_matrix(t_data *game, int col, int row);
-int			valid_path(t_data *game);
-int			check_char(t_data *game);
-void		check_p_pos(t_data *game);
-int			check_ber(char *argv, t_data *game);
+int					check_rectangle(t_data *game);
+void				count_elements(t_data *game);
+int					check_map(t_data *game);
+int					check_around_map(t_data *game);
+void				dfs_matrix(int x, int y, char **map);
+int					valid_path(t_data *game);
+int					check_char(t_data *game);
+void				check_p_pos(t_data *game);
+int					check_ber(char *argv, t_data *game);
 
 // Moves and key hook
-int			key_hook(int keysym, t_data *game);
-void		update_player_move(t_data *game, int key);
-void		move_top(t_data *game, int i, int j);
-void		move_right(t_data *game, int i, int j);
-void		move_left(t_data *game, int i, int j);
-void		move_down(t_data *game, int i, int j);
-void		door_locked_up_down(t_data *game, int door_row, int door_col);
-void		door_locked_right_left(t_data *game, int door_row, int door_col);
-void		print_foot(int key, t_data *game);
+int					key_hook(int keysym, t_data *game);
+void				update_player_move(t_data *game, int key);
+void				move_top(t_data *game, int i, int j);
+void				move_right(t_data *game, int i, int j);
+void				move_left(t_data *game, int i, int j);
+void				move_down(t_data *game, int i, int j);
+void				door_locked_up_down(t_data *game, int door_row,
+						int door_col);
+void				door_locked_right_left(t_data *game, int door_row,
+						int door_col);
+void				print_foot(int key, t_data *game);
 
 // Closing game
-int			close_game(t_data *game);
-void		free_map(t_data *game);
-void		free_img(t_data *game);
-int			error(char *str);
+int					close_game(t_data *game);
+void				free_map(t_data *game);
+void				free_img(t_data *game);
+int					error(char *str);
 
 // Define
-int			is_up(int key);
-int			is_down(int key);
-int			is_left(int key);
-int			is_right(int key);
-int			is_valid_char(int key);
+int					is_up(int key);
+int					is_down(int key);
+int					is_left(int key);
+int					is_right(int key);
+int					is_valid_char(int key);
 
-//utils
-int ft_strstr(char *str, char *to_find);
+// bonus
+void				display_moves(t_data *game);
+void			enemy_animations(t_data *game);
+void			init_enemies(t_data *game);
 
 #endif

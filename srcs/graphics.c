@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 17:59:03 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/20 19:29:27 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/21 14:11:23 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	print_map(char *line, t_data *game, int index)
 		else if (line[i] == '0' || line[i] == '2')
 			mlx_put_image_to_window(game->mlx, game->win, game->floor_img, 0 + i
 				* 32, 0 + (index * 32));
-		else if (line[i] == 'C' | line[i] == 'c')
+		else if (line[i] == 'C' || line[i] == 'c')
 			mlx_put_image_to_window(game->mlx, game->win, game->collectible_img,
 				0 + i * 32, 0 + (index * 32));
 		else if (line[i] == 'e')
@@ -46,10 +46,11 @@ void	print_map(char *line, t_data *game, int index)
 				* 32, 0 + (index * 32));
 		else if (line[i] == 'P')
 			put_player(game, i, index);
+		else if (line[i] == 'E')
+			enemy_animations(game);
 		i++;
 	}
 }
-
 
 void	fill_map(t_data *game, int lines, char *map_path)
 {
@@ -101,5 +102,5 @@ int	init_map(char *map_path, t_data *game)
 	}
 	close(file);
 	fill_map(game, line_count, map_path);
-	return (free(line),0);
+	return (free(line), 0);
 }

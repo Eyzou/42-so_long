@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define.c                                           :+:      :+:    :+:   */
+/*   display_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 16:26:31 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/21 09:55:00 by ehamm            ###   ########.fr       */
+/*   Created: 2024/05/21 11:17:52 by ehamm             #+#    #+#             */
+/*   Updated: 2024/05/21 11:18:03 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	is_up(int key)
+void display_moves(t_data *game) 
 {
-	return (key == XK_w || key == XK_W || key == XK_Up);
-}
+    char *moves;
+	char *msg;
+	int	i;
 
-int	is_down(int key)
-{
-	return (key == XK_s || key == XK_S || key == XK_Down);
-}
-
-int	is_left(int key)
-{
-	return (key == XK_a || key == XK_A || key == XK_Left);
-}
-
-int	is_right(int key)
-{
-	return (key == XK_d || key == XK_D || key == XK_Right);
-}
-
-int	is_valid_char(int key)
-{
-	return (key == 'C' || key == 'E' || key == '0' || key == 'P');
+	i = 0;
+    moves = ft_itoa(game->moves);
+	msg = ft_strjoin("Number of moves: ", moves);
+	while(i < game->colls_num)
+	{
+		mlx_put_image_to_window(game->mlx, game->win, game->wall_img, i*32,0);
+		i++;
+	}
+    mlx_string_put(game->mlx, game->win, 20, 20, 0xFFFFFF, msg);
+    free(moves);
+	free(msg);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:15:41 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/20 20:14:17 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/21 14:13:45 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ int	main(int argc, char **argv)
 		return (error("Error\nThe map is invalid\n"));
 	game = calloc(1, sizeof(t_data));
 	if (init_map(argv[1], game) == 1 || check_ber(argv[1], game) == 1)
-		return (1);
-	game->mlx = mlx_init();
-	if (game->mlx == NULL)
 	{
-		free(game->mlx);
+		free_map(game);
 		return (1);
 	}
+	init_enemies(game);
+	game->mlx = mlx_init();
+	if (game->mlx == NULL)
+		return (free(game->mlx),1);
 	game->win = mlx_new_window(game->mlx, (game->colls_num) * 32,
 			(game->row_num) * 32, "Elo RPG adventure");
 	if (game->win == NULL)
