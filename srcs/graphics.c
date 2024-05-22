@@ -6,18 +6,22 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 17:59:03 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/21 14:11:23 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/22 18:18:02 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	put_image(t_data *game, void *image, int x, int y)
+{
+	mlx_put_image_to_window(game->mlx, game->win, image, x * SIZE, y * SIZE);
+}
 
 void	add_graphics(t_data *game)
 {
 	int	i;
 
 	i = 0;
-	game->score = 0;
 	while (game->map[i] != NULL)
 	{
 		print_map(game->map[i], game, i);
@@ -33,21 +37,17 @@ void	print_map(char *line, t_data *game, int index)
 	while (line[i])
 	{
 		if (line[i] == '1')
-			mlx_put_image_to_window(game->mlx, game->win, game->wall_img, 0 + i
-				* 32, 0 + (index * 32));
+			put_image(game, game->wall_img,i,index);
 		else if (line[i] == '0' || line[i] == '2')
-			mlx_put_image_to_window(game->mlx, game->win, game->floor_img, 0 + i
-				* 32, 0 + (index * 32));
+			put_image(game, game->floor_img,i,index);
 		else if (line[i] == 'C' || line[i] == 'c')
-			mlx_put_image_to_window(game->mlx, game->win, game->collectible_img,
-				0 + i * 32, 0 + (index * 32));
+			put_image(game, game->collectible_img,i,index);
 		else if (line[i] == 'e')
-			mlx_put_image_to_window(game->mlx, game->win, game->door_img, 0 + i
-				* 32, 0 + (index * 32));
+			put_image(game, game->door_img,i,index);
 		else if (line[i] == 'P')
 			put_player(game, i, index);
-		else if (line[i] == 'E')
-			enemy_animations(game);
+		else if (line[i] == 'M'|| line[i] == 'm')
+			put_image(game, game->anim->sprites[game->anim->current_frame],i,index);
 		i++;
 	}
 }
@@ -60,7 +60,8 @@ void	fill_map(t_data *game, int lines, char *map_path)
 	i = 0;
 	file = open(map_path, O_RDWR);
 	game->moves = 1;
-	game->player_position = 1;
+	game->player_direction = 1;
+	game->score = 0;
 	game->map = malloc(sizeof(char **) * (lines + 1));
 	game->map[0] = get_next_line(file);
 	while (i < lines)

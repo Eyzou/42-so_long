@@ -19,8 +19,8 @@ SRCS = srcs/main.c \
 		srcs/close.c \
 		srcs/define.c \
 		srcs/utils.c\
-		srcs/display_bonus.c \
-		srcs/enemy_bonus.c 
+		srcs/display.c \
+		srcs/enemy.c 
 		
 OBJ = $(SRCS:%.c=%.o)
 

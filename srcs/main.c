@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:15:41 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/21 14:13:45 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/22 18:15:09 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,18 @@ int	main(int argc, char **argv)
 		free_map(game);
 		return (1);
 	}
-	init_enemies(game);
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
-		return (free(game->mlx),1);
-	game->win = mlx_new_window(game->mlx, (game->colls_num) * 32,
-			(game->row_num) * 32, "Elo RPG adventure");
+		return (free(game->mlx), 1);
+	game->win = mlx_new_window(game->mlx, (game->colls_num) * SIZE,
+			(game->row_num) * SIZE, "Elo RPG adventure");
 	if (game->win == NULL)
 		return (1);
+	init_enemies(game);
 	set_images(game);
 	add_graphics(game);
+	mlx_loop_hook(game->mlx, anim_loop, game);
+	// mlx_loop_hook(game->mlx,enemy_move,game);
 	mlx_hook(game->win, KeyPress, KeyPressMask, key_hook, game);
 	mlx_hook(game->win, 17, 0, close_game, game);
 	mlx_loop(game->mlx);

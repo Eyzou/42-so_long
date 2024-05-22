@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 11:18:26 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/21 10:11:36 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/22 17:49:36 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,29 @@
 
 void	set_images(t_data *game)
 {
-	int	i;
-	int	j;
+	int	size;
 
-	game->floor_img = mlx_xpm_file_to_image(game->mlx, FLOOR_PATH, &i, &j);
+	game->floor_img = mlx_xpm_file_to_image(game->mlx, FLOOR_PATH, &size,
+			&size);
 	if (game->floor_img == NULL)
 		return ;
-	game->wall_img = mlx_xpm_file_to_image(game->mlx, WALL_PATH, &i, &j);
+	game->wall_img = mlx_xpm_file_to_image(game->mlx, WALL_PATH, &size, &size);
 	if (game->wall_img == NULL)
 		return ;
-	game->collectible_img = mlx_xpm_file_to_image(game->mlx, COLL_PATH, &i, &j);
+	game->collectible_img = mlx_xpm_file_to_image(game->mlx, COLL_PATH, &size,
+			&size);
 	if (game->collectible_img == NULL)
 		return ;
-	game->door_img = mlx_xpm_file_to_image(game->mlx, DOOR_PATH, &i, &j);
+	game->door_img = mlx_xpm_file_to_image(game->mlx, DOOR_PATH, &size, &size);
 	if (game->door_img == NULL)
 		return ;
-	game->player_img = mlx_xpm_file_to_image(game->mlx, PLAYER_PATH, &i, &j);
+	game->player_img = mlx_xpm_file_to_image(game->mlx, PLAYER_PATH, &size,
+			&size);
 	if (game->player_img == NULL)
+		return ;
+	game->enemy_img = mlx_xpm_file_to_image(game->mlx, ENEMY_PATH, &size,
+			&size);
+	if (game->enemy_img == NULL)
 		return ;
 }
 

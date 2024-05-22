@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:37:24 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/21 14:25:38 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/22 18:02:05 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <unistd.h>
 
+
 # define U 2
 # define D 3
 # define R 0
@@ -32,9 +33,9 @@
 # define COLL_PATH "./img/carott.xpm"
 # define PLAYER_PATH "./img/player.xpm"
 # define DOOR_PATH "./img/fish.xpm"
-# define ENEMY_PATH "./img/monster"
+# define ENEMY_PATH "./img/monster_l1.xpm"
 # define NUM_FRAMES 8
-
+# define SIZE 32
 
 typedef struct s_player_pos
 {
@@ -42,14 +43,22 @@ typedef struct s_player_pos
 	int				col;
 }					t_player_pos;
 
+
 typedef struct s_anim
 {
-	char 			*sprites[NUM_FRAMES];
+	void 			*sprites[NUM_FRAMES];
 	int				last_time;
 	int				delay;
 	int				current_frame;
 }					t_anim;
 
+typedef struct s_enemy
+{
+	int				step;
+	int				direction;
+	int				x;
+	int				y;	
+}	t_enemy;
 
 typedef struct s_data
 {
@@ -64,15 +73,17 @@ typedef struct s_data
 	int				y;
 	int				colls_num;
 	int				row_num;
-	int				player_position;
+	int				player_direction;
 	char			**map;
 	void			*wall_img;
 	void			*floor_img;
 	void			*collectible_img;
 	void			*door_img;
 	void			*player_img;
+	void			*enemy_img;
 	t_player_pos	player_pos;
-	t_anim			*enemy;
+	t_anim			*anim;
+	t_enemy			*enemy;
 }					t_data;
 
 // Graphics
@@ -82,6 +93,7 @@ void				set_images(t_data *game);
 void				print_map(char *line, t_data *game, int index);
 void				add_graphics(t_data *game);
 void				put_player(t_data *game, int width, int height);
+void				put_image(t_data *game, void *image, int x, int y);
 
 // check map
 int					check_rectangle(t_data *game);
@@ -122,7 +134,7 @@ int					is_valid_char(int key);
 
 // bonus
 void				display_moves(t_data *game);
-void			enemy_animations(t_data *game);
-void			init_enemies(t_data *game);
+int				init_enemies(t_data *game);
+int				anim_loop(t_data *game);
 
 #endif

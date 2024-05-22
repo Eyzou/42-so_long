@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 17:24:52 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/18 14:37:17 by elo              ###   ########.fr       */
+/*   Updated: 2024/05/22 16:28:26 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,20 @@ void	free_map(t_data *game)
 
 void	free_img(t_data *game)
 {
+	int	i;
+
+	i = 0;
 	mlx_destroy_image(game->mlx, game->collectible_img);
 	mlx_destroy_image(game->mlx, game->floor_img);
 	mlx_destroy_image(game->mlx, game->wall_img);
 	mlx_destroy_image(game->mlx, game->door_img);
 	mlx_destroy_image(game->mlx, game->player_img);
+	mlx_destroy_image(game->mlx, game->enemy_img);
+	while (i < NUM_FRAMES)
+	{
+		mlx_destroy_image(game->mlx, game->anim->sprites[i]);
+		i++;
+	}
 }
 
 int	close_game(t_data *game)
@@ -49,5 +58,5 @@ int	close_game(t_data *game)
 int	error(char *str)
 {
 	ft_printf("%s", str);
-	exit (1);
+	exit(1);
 }

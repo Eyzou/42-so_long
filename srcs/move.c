@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 08:43:00 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/21 14:11:26 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/22 17:03:46 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	put_player(t_data *game, int col, int row)
 {
-	if (game->player_position == U)
+	if (game->player_direction == U)
 		mlx_put_image_to_window(game->mlx, game->win, game->player_img, col
 			* 32, row * 32);
-	else if (game->player_position == D)
+	else if (game->player_direction == D)
 		mlx_put_image_to_window(game->mlx, game->win, game->player_img, col
 			* 32, row * 32);
-	else if (game->player_position == L)
+	else if (game->player_direction == L)
 		mlx_put_image_to_window(game->mlx, game->win, game->player_img, col
 			* 32, row * 32);
-	else if (game->player_position == R)
+	else if (game->player_direction == R)
 		mlx_put_image_to_window(game->mlx, game->win, game->player_img, col
 			* 32, row * 32);
 	game->x = col;
@@ -32,7 +32,7 @@ void	put_player(t_data *game, int col, int row)
 
 void	move_top(t_data *game, int i, int j)
 {
-	game->player_position = U;
+	game->player_direction = U;
 	if (game->map[j + 1][i] == 'c')
 		game->score += 1;
 	else if (game->map[j + 1][i] == 'e' && game->collectible_num == game->score)
@@ -55,7 +55,7 @@ void	move_top(t_data *game, int i, int j)
 
 void	move_down(t_data *game, int i, int j)
 {
-	game->player_position = D;
+	game->player_direction = D;
 	if (game->map[j - 1][i] == 'c')
 		game->score += 1;
 	else if (game->map[j - 1][i] == 'e' && game->collectible_num == game->score)
@@ -78,7 +78,7 @@ void	move_down(t_data *game, int i, int j)
 
 void	move_left(t_data *game, int i, int j)
 {
-	game->player_position = L;
+	game->player_direction = L;
 	if (game->map[j][i - 1] == 'c')
 		game->score += 1;
 	else if (game->map[j][i - 1] == 'e' && game->collectible_num == game->score)
@@ -101,7 +101,7 @@ void	move_left(t_data *game, int i, int j)
 
 void	move_right(t_data *game, int i, int j)
 {
-	game->player_position = R;
+	game->player_direction = R;
 	if (game->map[j][i + 1] == 'c')
 		game->score += 1;
 	else if (game->map[j][i + 1] == 'e' && game->collectible_num == game->score)

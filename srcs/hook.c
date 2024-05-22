@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:43:47 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/21 11:18:26 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/22 18:17:13 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,19 @@ void	update_player_move(t_data *game, int key)
 	col = game->x;
 	row = game->y;
 	print_foot(key, game);
-	display_moves(game);
-	if (is_down(key) && game->map[row + 1][col] != '1')
+	if (is_down(key) && game->map[row + 1][col] != '1' && game->map[row + 1][col] != 'm')
 		move_top(game, col, row);
-	if (is_up(key) && game->map[row - 1][col] != '1')
+	if (is_up(key) && game->map[row - 1][col] != '1'&& game->map[row - 1][col] != 'm')
 		move_down(game, col, row);
-	if (is_right(key) && game->map[row][col + 1] != '1')
+	if (is_right(key) && game->map[row][col + 1] != '1'&& game->map[row][col + 1] != 'm')
 		move_right(game, col, row);
-	if (is_left(key) && game->map[row][col - 1] != '1')
+	if (is_left(key) && game->map[row][col - 1] != '1'&& game->map[row][col - 1] != 'm')
 		move_left(game, col, row);
 }
 
 void	door_locked_up_down(t_data *game, int door_row, int door_col)
 {
-	if (game->player_position == U)
+	if (game->player_direction == U)
 	{
 		if (game->map[door_row + 1][door_col] == '1')
 			return ;
@@ -55,7 +54,7 @@ void	door_locked_up_down(t_data *game, int door_row, int door_col)
 		mlx_put_image_to_window(game->mlx, game->win, game->floor_img, door_col
 			* 32, (door_row - 1) * 32);
 	}
-	else if (game->player_position == D)
+	else if (game->player_direction == D)
 	{
 		if (game->map[door_row - 1][door_col] == '1')
 			return ;
@@ -71,7 +70,7 @@ void	door_locked_up_down(t_data *game, int door_row, int door_col)
 
 void	door_locked_right_left(t_data *game, int door_row, int door_col)
 {
-	if (game->player_position == R)
+	if (game->player_direction == R)
 	{
 		if (game->map[door_row][door_col + 1] == '1')
 			return ;
@@ -83,7 +82,7 @@ void	door_locked_right_left(t_data *game, int door_row, int door_col)
 		mlx_put_image_to_window(game->mlx, game->win, game->floor_img, (door_col
 				- 1) * 32, door_row * 32);
 	}
-	else if (game->player_position == L)
+	else if (game->player_direction == L)
 	{
 		if (game->map[door_row][door_col - 1] == '1')
 			return ;
@@ -116,4 +115,5 @@ void	print_foot(int key, t_data *game)
 		ft_printf("tu as fait %i pas\n", moves);
 	if (is_left(key) && map[j][i - 1] != '1' && map[j][i - 1] != 'e')
 		ft_printf("tu as fait %i pas\n", moves);
+	ft_printf("tu as un score de %i\n", game->score);
 }
