@@ -5,93 +5,108 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 11:20:48 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/22 17:50:50 by ehamm            ###   ########.fr       */
+/*   Created: 2024/05/22 17:23:00 by ehamm             #+#    #+#             */
+/*   Updated: 2024/05/23 17:10:43 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 #include <time.h>
 
-int	init_enemies(t_data *game)
-{
-	int	i;
-	int	j;
+static int	move_enemy_up_down(t_data *game, int rand);
+static int	move_enemy_left_rigth(t_data *game, int rand);
 
-	game->anim = ft_calloc(1, sizeof(t_anim));
-	if (game->anim == NULL)
-		exit(1);
-	game->anim->last_time = 0;
-	game->anim->current_frame = 0;
-	game->anim->sprites[0] = mlx_xpm_file_to_image(game->mlx,
-			"./img/monster_l1.xpm", &i, &j);
-	game->anim->sprites[1] = mlx_xpm_file_to_image(game->mlx,
-			"./img/monster_d2.xpm", &i, &j);
-	game->anim->sprites[2] = mlx_xpm_file_to_image(game->mlx,
-			"./img/monster_l1.xpm", &i, &j);
-	game->anim->sprites[3] = mlx_xpm_file_to_image(game->mlx,
-			"./img/monster_l2.xpm", &i, &j);
-	game->anim->sprites[4] = mlx_xpm_file_to_image(game->mlx,
-			"./img/monster_r1.xpm", &i, &j);
-	game->anim->sprites[5] = mlx_xpm_file_to_image(game->mlx,
-			"./img/monster_r2.xpm", &i, &j);
-	game->anim->sprites[6] = mlx_xpm_file_to_image(game->mlx,
-			"./img/monster_u1.xpm", &i, &j);
-	game->anim->sprites[7] = mlx_xpm_file_to_image(game->mlx,
-			"./img/monster_u2.xpm", &i, &j);
+int	enemy_loop(t_data *game)
+{
+	int	delay;
+	int	random1;
+	int	random2;
+
+	game->loop++;
+	random1 = (rand() % 2);
+	random2 = (rand() % 2);
+	if (random1 == 0)
+		random1 = -1;
+	delay = 5500;
+	game->enemy = game->loop % delay;
+	if(game->enemy == 0)
+	{
+		if (random2 == 0)
+			move_enemy_left_rigth(game, random1);
+		else if (random2 == 1)
+			move_enemy_up_down(game, random1);
+	}
 	return (0);
 }
-
-int	anim_loop(t_data *game)
+void	find_enemies(t_data *game)
 {
-	int	current_time;
+	int	row;
+	int	col;
 
-	current_time = clock();
-	if (current_time - game->anim->last_time > 50000)
+	game->enemy_num = 0;
+	row = 0;
+	while (game->map[row])
 	{
-		game->anim->current_frame++;
-		if (game->anim->current_frame >= NUM_FRAMES)
-			game->anim->current_frame = 0;
-		game->anim->last_time = current_time;
-		add_graphics(game);
-		display_moves(game);
-	}
-	if (game->anim->sprites[game->anim->current_frame] == NULL)
-		close_game(game);
-	return (0);
-}
-
-void	enemy_loop(t_data *game)
-{
-	int current_time;
-	game->enemy->step =0;
-
-	current_time = clock();
-	if (current_time - game->anim->last_time > 5000)
-	{
-		add_graphics(game);
-		display_moves(game);
-		game->anim->last_time = current_time;
-	}
-}
-
-/*int	patrol_loop(t_data *game)
-{
-	int current_time;
-
-	current_time = clock();
-	if (current_time - game->anim->last_time > 50000)
+		col = 0;
+		while (game->map[row][col])
 		{
-
-			game->anim->current_frame++;
-			if (game->anim->current_frame >= NUM_FRAMES)
-				game->anim->current_frame = 0;
-			game->anim->last_time = current_time;
-			add_graphics(game);
-			display_moves(game);
+			if (game->map[row][col] == 'm')
+			{
+				game->enemy_x[game->enemy_num] = col;
+				game->enemy_y[game->enemy_num] = row;
+				game->enemy_num++;
+			}
+			col++;
 		}
+		row++;
+	}
+}
 
-	if(game->anim->sprites[game->anim->current_frame] == NULL)
-			close_game(game);
+static int	move_enemy_left_rigth(t_data *game, int rand)
+{
+	int idx;
+	idx = 0;
+	while(idx < game->enemy_num)
+	{
+		if (game->map[game->enemy_y[idx]][game->enemy_x[idx + rand]] == '2')
+		{
+			put_image(game, game->floor_img, game->enemy_x[idx], game->enemy_y[idx]);
+			game->map[game->enemy_y[idx]][game->enemy_x[idx]] = '2';
+			game->enemy_x[idx] = game->enemy_x[idx] + rand;
+			game->map[game->enemy_y[idx]][game->enemy_x[idx]] = 'm';
+			if (rand < 0)
+				put_image(game, game->enemy_img_left, game->enemy_x[idx], game->enemy_y[idx]);
+			if (rand > 0)
+				put_image(game, game->enemy_img_right, game->enemy_x[idx], game->enemy_y[idx]);
+		}
+		else if (game->map[game->enemy_y[idx]][game->enemy_x[idx] + rand] == 'P')
+			end_game(game,"YOU LOOSE");
+		idx++;
+	}
 	return(0);
-}*/
+}
+
+static int	move_enemy_up_down(t_data *game, int rand)
+{
+	int idx;
+	idx = 0;
+	while(idx <game->enemy_num)
+	{
+		if (game->map[game->enemy_y[idx] + rand][game->enemy_x[idx]] == '2')
+		{
+			put_image(game, game->floor_img, game->enemy_x[idx], game->enemy_y[idx]);
+			game->map[game->enemy_y[idx]][game->enemy_x[idx]] = '2';
+			game->enemy_y[idx] = game->enemy_y[idx] + rand;
+			game->map[game->enemy_y[idx]][game->enemy_x[idx]] = 'm';
+			if (rand < 0)
+				put_image(game, game->enemy_img_up, game->enemy_x[idx], game->enemy_y[idx]);
+			if (rand > 0)
+				put_image(game, game->enemy_img_down, game->enemy_x[idx], game->enemy_y[idx]);
+		}
+		else if (game->map[game->enemy_y[idx] + rand][game->enemy_x[idx]] == 'P')
+			end_game(game,"YOU LOOSE");
+		idx++;
+	}
+
+	return(0);
+}

@@ -10,17 +10,17 @@ LIB_FLAGS = -Llibft -lft
 INCLUDE = -I ./includes -I ./libft -I ./mlx
 #INCLUDE = -I ./includes -I ./libft -I ./mlx -I/opt/X11/include
 SRCS = srcs/main.c \
+		srcs/init.c \
 		srcs/graphics.c \
-		srcs/settings.c \
 		srcs/hook.c \
 		srcs/move.c \
 		srcs/check_map.c \
 		srcs/check_map2.c \
 		srcs/close.c \
 		srcs/define.c \
-		srcs/utils.c\
 		srcs/display.c \
-		srcs/enemy.c 
+		srcs/enemy.c\
+		srcs/animations.c 
 		
 OBJ = $(SRCS:%.c=%.o)
 

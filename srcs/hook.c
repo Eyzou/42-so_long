@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:43:47 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/22 18:17:13 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 14:44:27 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,20 @@ int	key_hook(int keysym, t_data *game)
 	return (0);
 }
 
-void	update_player_move(t_data *game, int key)
+void	put_player(t_data *game, int col, int row)
 {
-	int	col;
-	int	row;
-
-	col = game->x;
-	row = game->y;
-	print_foot(key, game);
-	if (is_down(key) && game->map[row + 1][col] != '1' && game->map[row + 1][col] != 'm')
-		move_top(game, col, row);
-	if (is_up(key) && game->map[row - 1][col] != '1'&& game->map[row - 1][col] != 'm')
-		move_down(game, col, row);
-	if (is_right(key) && game->map[row][col + 1] != '1'&& game->map[row][col + 1] != 'm')
-		move_right(game, col, row);
-	if (is_left(key) && game->map[row][col - 1] != '1'&& game->map[row][col - 1] != 'm')
-		move_left(game, col, row);
+	if (game->player_direction == U)
+		put_image(game,game->player_img_down, col,row);
+	else if (game->player_direction == D)
+		put_image(game,game->player_img_up, col,row);
+	else if (game->player_direction == L)
+		put_image(game,game->player_img_left, col,row);
+	else if (game->player_direction == R)
+		put_image(game,game->player_img_right, col,row);
+	game->x = col;
+	game->y = row;
 }
+
 
 void	door_locked_up_down(t_data *game, int door_row, int door_col)
 {
@@ -51,8 +48,7 @@ void	door_locked_up_down(t_data *game, int door_row, int door_col)
 		game->map[door_row - 1][door_col] = '0';
 		game->map[door_row + 1][door_col] = 'P';
 		put_player(game, door_col, door_row + 1);
-		mlx_put_image_to_window(game->mlx, game->win, game->floor_img, door_col
-			* 32, (door_row - 1) * 32);
+		put_image(game, game->floor_img, door_col, (door_row - 1));
 	}
 	else if (game->player_direction == D)
 	{
@@ -63,8 +59,7 @@ void	door_locked_up_down(t_data *game, int door_row, int door_col)
 		game->map[door_row + 1][door_col] = '0';
 		game->map[door_row - 1][door_col] = 'P';
 		put_player(game, door_col, door_row - 1);
-		mlx_put_image_to_window(game->mlx, game->win, game->floor_img, door_col
-			* 32, (door_row + 1) * 32);
+		put_image(game, game->floor_img, door_col, (door_row + 1));
 	}
 }
 
@@ -79,8 +74,7 @@ void	door_locked_right_left(t_data *game, int door_row, int door_col)
 		game->map[door_row][door_col - 1] = '0';
 		game->map[door_row][door_col + 1] = 'P';
 		put_player(game, door_col + 1, door_row);
-		mlx_put_image_to_window(game->mlx, game->win, game->floor_img, (door_col
-				- 1) * 32, door_row * 32);
+		put_image(game, game->floor_img, (door_col -1), door_row);
 	}
 	else if (game->player_direction == L)
 	{
@@ -91,29 +85,7 @@ void	door_locked_right_left(t_data *game, int door_row, int door_col)
 		game->map[door_row][door_col + 1] = '0';
 		game->map[door_row][door_col - 1] = 'P';
 		put_player(game, door_col - 1, door_row);
-		mlx_put_image_to_window(game->mlx, game->win, game->floor_img, (door_col
-				+ 1) * 32, door_row * 32);
+		put_image(game, game->floor_img, (door_col +1), door_row);
 	}
 }
 
-void	print_foot(int key, t_data *game)
-{
-	int		i;
-	int		j;
-	int		moves;
-	char	**map;
-
-	map = game->map;
-	moves = game->moves;
-	i = game->x;
-	j = game->y;
-	if (is_down(key) && map[j + 1][i] != '1' && map[j + 1][i] != 'e')
-		ft_printf("tu as fait %i pas\n", moves);
-	if (is_up(key) && map[j - 1][i] != '1' && map[j - 1][i] != 'e')
-		ft_printf("tu as fait %i pas\n", moves);
-	if (is_right(key) && map[j][i + 1] != '1' && map[j][i + 1] != 'e')
-		ft_printf("tu as fait %i pas\n", moves);
-	if (is_left(key) && map[j][i - 1] != '1' && map[j][i - 1] != 'e')
-		ft_printf("tu as fait %i pas\n", moves);
-	ft_printf("tu as un score de %i\n", game->score);
-}
