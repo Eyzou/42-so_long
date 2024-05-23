@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:20:48 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/23 16:52:38 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 17:39:45 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	init_animation(t_data *game)
 	game->anim->sprites[3] = get_images(game,"./img/door_2.xpm");
 	game->anim->sprites[4] = get_images(game,"./img/door_3.xpm");
 	game->anim->sprites[5] = get_images(game,"./img/door_4.xpm");
-	find_enemies(game);
 	return (0);
 }
 int combined_loop(t_data *game)
