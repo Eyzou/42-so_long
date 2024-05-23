@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:15:41 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/23 16:43:08 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 18:23:56 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	t_data *game;
-	
+	t_data	*game;
+
 	if (argc != 2)
 		return (error("Error\nThe map is invalid\n"));
 	game = calloc(1, sizeof(t_data));
-	init_game(game,argv);
+	init_game(game, argv);
 	init_mlx(game);
 	init_animation(game);
 	set_images(game);
@@ -30,4 +30,3 @@ int	main(int argc, char **argv)
 	mlx_loop(game->mlx);
 	return (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:23:00 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/23 17:53:04 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 18:27:39 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	enemy_loop(t_data *game)
 		random1 = -1;
 	delay = 5500;
 	game->enemy = game->loop % delay;
-	if(game->enemy == 0)
+	if (game->enemy == 0)
 	{
 		if (random2 == 0)
 			move_enemy_left_rigth(game, random1);
@@ -39,6 +39,7 @@ int	enemy_loop(t_data *game)
 	}
 	return (0);
 }
+
 void	find_enemies(t_data *game)
 {
 	int	row;
@@ -65,41 +66,48 @@ void	find_enemies(t_data *game)
 
 static int	move_enemy_left_rigth(t_data *game, int random)
 {
-	int idx;
-	idx = (rand() % 2);
-		if (game->map[game->enemy_y[idx]][game->enemy_x[idx] + random] == '2')
-		{
-			put_image(game, game->floor_img, game->enemy_x[idx], game->enemy_y[idx]);
-			game->map[game->enemy_y[idx]][game->enemy_x[idx]] = '2';
-			game->enemy_x[idx] = game->enemy_x[idx] + random;
-			game->map[game->enemy_y[idx]][game->enemy_x[idx]] = 'm';
-			if (random < 0)
-				put_image(game, game->enemy_img_left, game->enemy_x[idx], game->enemy_y[idx]);
-			if (random > 0)
-				put_image(game, game->enemy_img_right, game->enemy_x[idx], game->enemy_y[idx]);
-		}
-		else if (game->map[game->enemy_y[idx]][game->enemy_x[idx] + random] == 'P')
-			end_game(game,"YOU LOOSE");
+	int	idx;
 
-	return(0);
+	idx = (rand() % 2);
+	if (game->map[game->enemy_y[idx]][game->enemy_x[idx] + random] == '2')
+	{
+		put_image(game, game->floor_img, game->enemy_x[idx],
+			game->enemy_y[idx]);
+		game->map[game->enemy_y[idx]][game->enemy_x[idx]] = '2';
+		game->enemy_x[idx] = game->enemy_x[idx] + random;
+		game->map[game->enemy_y[idx]][game->enemy_x[idx]] = 'm';
+		if (random < 0)
+			put_image(game, game->enemy_img_left, game->enemy_x[idx],
+				game->enemy_y[idx]);
+		if (random > 0)
+			put_image(game, game->enemy_img_right, game->enemy_x[idx],
+				game->enemy_y[idx]);
+	}
+	else if (game->map[game->enemy_y[idx]][game->enemy_x[idx] + random] == 'P')
+		end_game(game, "YOU LOOSE");
+	return (0);
 }
 
 static int	move_enemy_up_down(t_data *game, int random)
 {
-	int idx;
+	int	idx;
+
 	idx = (rand() % 2);
-		if (game->map[game->enemy_y[idx] + random][game->enemy_x[idx]] == '2')
-		{
-			put_image(game, game->floor_img, game->enemy_x[idx], game->enemy_y[idx]);
-			game->map[game->enemy_y[idx]][game->enemy_x[idx]] = '2';
-			game->enemy_y[idx] = game->enemy_y[idx] + random;
-			game->map[game->enemy_y[idx]][game->enemy_x[idx]] = 'm';
-			if (random < 0)
-				put_image(game, game->enemy_img_up, game->enemy_x[idx], game->enemy_y[idx]);
-			if (random > 0)
-				put_image(game, game->enemy_img_down, game->enemy_x[idx], game->enemy_y[idx]);
-		}
-		else if (game->map[game->enemy_y[idx] + random][game->enemy_x[idx]] == 'P')
-			end_game(game,"YOU LOOSE");
-	return(0);
+	if (game->map[game->enemy_y[idx] + random][game->enemy_x[idx]] == '2')
+	{
+		put_image(game, game->floor_img, game->enemy_x[idx],
+			game->enemy_y[idx]);
+		game->map[game->enemy_y[idx]][game->enemy_x[idx]] = '2';
+		game->enemy_y[idx] = game->enemy_y[idx] + random;
+		game->map[game->enemy_y[idx]][game->enemy_x[idx]] = 'm';
+		if (random < 0)
+			put_image(game, game->enemy_img_up, game->enemy_x[idx],
+				game->enemy_y[idx]);
+		if (random > 0)
+			put_image(game, game->enemy_img_down, game->enemy_x[idx],
+				game->enemy_y[idx]);
+	}
+	else if (game->map[game->enemy_y[idx] + random][game->enemy_x[idx]] == 'P')
+		end_game(game, "YOU LOOSE");
+	return (0);
 }

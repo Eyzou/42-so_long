@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 17:59:03 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/23 15:05:45 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 18:25:18 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ void	*get_images(t_data *game, char *path)
 		return (NULL);
 	return (img_addr);
 }
+
 void	put_image(t_data *game, void *image, int x, int y)
 {
 	mlx_put_image_to_window(game->mlx, game->win, image, x * SIZE, y * SIZE);
 }
+
 void	set_images(t_data *game)
 {
 	game->floor_img = get_images(game, FLOOR_PATH);
@@ -41,6 +43,7 @@ void	set_images(t_data *game)
 	game->enemy_img_left = get_images(game, ENEMY_LEFT_PATH);
 	game->enemy_img_right = get_images(game, ENEMY_RIGHT_PATH);
 }
+
 static void	print_map(char *line, t_data *game, int index)
 {
 	int	i;
@@ -64,6 +67,7 @@ static void	print_map(char *line, t_data *game, int index)
 		i++;
 	}
 }
+
 void	add_graphics(t_data *game)
 {
 	int	i;

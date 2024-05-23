@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 08:43:00 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/23 13:06:51 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 18:24:02 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	move_top(t_data *game, int i, int j)
 	if (game->map[j + 1][i] == 'c')
 		game->score += 1;
 	else if (game->map[j + 1][i] == 'e' && game->collectible_num == game->score)
-	end_game(game, "YOU WON!");
+		end_game(game, "YOU WON!");
 	else if (game->map[j + 1][i] == 'm')
 		end_game(game, "YOU LOOSE!");
 	else if (game->map[j + 1][i] == 'e')

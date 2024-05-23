@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 10:12:20 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/23 14:35:27 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 18:24:15 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ int	valid_path(t_data *game)
 	return (0);
 }
 
-
-int	check_ber(char *argv, t_data *game)
+void	check_ber(char *argv, t_data *game)
 {
 	char	*ber_pos;
 
@@ -70,16 +69,15 @@ int	check_ber(char *argv, t_data *game)
 	{
 		ft_printf("Error\nThe map is not a .ber file\n");
 		free(game);
-		return (1);
+		exit(1);
 	}
 	else if (ft_strlen(ber_pos) > 4)
 	{
 		ft_printf("Error\nThe map is not a .ber file\n");
 		free(game);
-		return (1);
+		exit(1);
 	}
 	// besoin de corriger case quand .ber only
-	return (0);
 }
 
 void	count_elements(t_data *game)

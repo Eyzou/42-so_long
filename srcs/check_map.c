@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:55:11 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/23 14:32:28 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 18:23:06 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	check_around_map(t_data *game)
 	}
 	return (0);
 }
+
 static int	check_rectangle(t_data *game)
 {
 	int	col;

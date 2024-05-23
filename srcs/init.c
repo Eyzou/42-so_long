@@ -6,13 +6,13 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 11:03:12 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/23 13:54:23 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 18:27:29 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int init_mlx(t_data *game)
+int	init_mlx(t_data *game)
 {
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
@@ -21,10 +21,12 @@ int init_mlx(t_data *game)
 			(game->row_num) * SIZE, "ELO RPG ADVENTURE");
 	if (game->win == NULL)
 		return (1);
-	return(0);
+	return (0);
 }
+
 int	init_game(t_data *game, char **argv)
 {
+	check_ber(argv[1], game);
 	game->moves = 1;
 	game->player_direction = 0;
 	game->score = 0;
@@ -32,14 +34,10 @@ int	init_game(t_data *game, char **argv)
 	game->row_num = 0;
 	game->x = 0;
 	game->y = 0;
-	init_map(argv[1],game);
-	if(check_ber(argv[1],game) == 1)
-	{
-		free_map(game);
-		return(1);
-	}
+	init_map(argv[1], game);
 	return (0);
 }
+
 static void	fill_map(t_data *game, int lines, char *map_path)
 {
 	int	file;
@@ -63,6 +61,7 @@ static void	fill_map(t_data *game, int lines, char *map_path)
 	}
 	close(file);
 }
+
 int	init_map(char *map_path, t_data *game)
 {
 	int		file;
@@ -72,13 +71,13 @@ int	init_map(char *map_path, t_data *game)
 	line_count = 0;
 	file = open(map_path, O_RDONLY);
 	if (file == -1)
-	{
-		ft_printf("Error!\nMap is invalid\n");
-		return (1);
-	}
+		return (error("Error\nMap is invalid\n"), 1);
 	line = get_next_line(file);
 	if (line == NULL)
+	{
+		free(game);
 		return (error("Error\nThe map is empty\n"));
+	}
 	while (line)
 	{
 		free(line);

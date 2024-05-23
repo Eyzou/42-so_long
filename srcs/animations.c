@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:20:48 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/23 17:39:45 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 18:27:33 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ int	init_animation(t_data *game)
 		exit(1);
 	game->anim->last_time = 0;
 	game->anim->current_frame = 0;
-	game->anim->sprites[0] = get_images(game,"./img/door_01.xpm");
-	game->anim->sprites[1] = get_images(game,"./img/door_02.xpm");
-	game->anim->sprites[2] = get_images(game,"./img/door_1.xpm");
-	game->anim->sprites[3] = get_images(game,"./img/door_2.xpm");
-	game->anim->sprites[4] = get_images(game,"./img/door_3.xpm");
-	game->anim->sprites[5] = get_images(game,"./img/door_4.xpm");
+	game->anim->sprites[0] = get_images(game, "./img/door_01.xpm");
+	game->anim->sprites[1] = get_images(game, "./img/door_02.xpm");
+	game->anim->sprites[2] = get_images(game, "./img/door_1.xpm");
+	game->anim->sprites[3] = get_images(game, "./img/door_2.xpm");
+	game->anim->sprites[4] = get_images(game, "./img/door_3.xpm");
+	game->anim->sprites[5] = get_images(game, "./img/door_4.xpm");
 	return (0);
 }
-int combined_loop(t_data *game)
+
+int	combined_loop(t_data *game)
 {
 	anim_loop(game);
 	enemy_loop(game);

@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:37:24 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/23 16:52:57 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 18:22:10 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,13 @@ void	put_player(t_data *game, int width, int height);
 int		check_map(t_data *game);
 int		valid_path(t_data *game);
 void	count_elements(t_data *game);
-int		check_ber(char *argv, t_data *game);
+void	check_ber(char *argv, t_data *game);
 
 // Moves and key hook
 int		key_hook(int keysym, t_data *game);
 void	update_player_move(t_data *game, int key);
 void	door_locked_up_down(t_data *game, int door_row,	int door_col);
-void	door_locked_right_left(t_data *game, int door_row,int door_col);
+void	door_locked_right_left(t_data *game, int door_row, int door_col);
 void	print_foot(int key, t_data *game);
 
 // Closing game
@@ -137,9 +137,9 @@ int		is_valid_char(int key);
 void	display_moves(t_data *game);
 int		init_animation(t_data *game);
 void	init_enemy(t_data *game);
-int 	combined_loop(t_data *game);
+int		combined_loop(t_data *game);
 int		anim_loop(t_data *game);
-int		 enemy_loop(t_data *game);
+int		enemy_loop(t_data *game);
 void	find_enemies(t_data *game);
 
 #endif
