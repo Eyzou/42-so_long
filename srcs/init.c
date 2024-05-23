@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: elo <elo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 11:03:12 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/23 18:27:29 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/23 20:56:07 by elo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init_mlx(t_data *game)
 int	init_game(t_data *game, char **argv)
 {
 	check_ber(argv[1], game);
-	game->moves = 1;
+	game->moves = 0;
 	game->player_direction = 0;
 	game->score = 0;
 	game->colls_num = 0;
