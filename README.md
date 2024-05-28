@@ -84,6 +84,6 @@ Example map:
 
 ## Author
 
-This project was developed by **[EYZOU LA PTITE GOAT]** as part of the 42 curriculum. **.
+This project was developed by **[EYZOU LA PTITE GOAT]** as part of the 42 curriculum.
 
 ---
