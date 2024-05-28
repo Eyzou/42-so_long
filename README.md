@@ -35,9 +35,12 @@ To run the `so_long` project, you need the following:
 
 2. **Compile the project:**
 
+without bonus
    ```bash
    make 
    ```
+with bonus
+
  ```bash
    make  bonus
    ```
