@@ -6,11 +6,11 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 11:03:12 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/28 11:14:51 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/28 11:18:26 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes_bonus/so_long_bonus.h"
 
 int	init_mlx(t_data *game)
 {

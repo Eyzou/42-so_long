@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:37:24 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/28 10:49:43 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/28 10:54:25 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
@@ -35,6 +35,10 @@
 # define PLAYER_LEFT_PATH "./img/player_left.xpm"
 # define PLAYER_RIGHT_PATH "./img/player_right.xpm"
 # define DOOR_PATH "./img/fish.xpm"
+# define ENEMY_UP_PATH "./img/monster_u1.xpm"
+# define ENEMY_DOWN_PATH "./img/monster_d1.xpm"
+# define ENEMY_LEFT_PATH "./img/monster_l1.xpm"
+# define ENEMY_RIGHT_PATH "./img/monster_r1.xpm"
 
 # define NUM_FRAMES 6
 # define SIZE 32
@@ -44,6 +48,14 @@ typedef struct s_player_pos
 	int				row;
 	int				col;
 }					t_player_pos;
+
+typedef struct s_anim
+{
+	void			*sprites[NUM_FRAMES];
+	int				last_time;
+	int				delay;
+	int				current_frame;
+}					t_anim;
 
 typedef struct s_data
 {
@@ -73,7 +85,12 @@ typedef struct s_data
 	void			*player_img_down;
 	void			*player_img_right;
 	void			*player_img_left;
+	void			*enemy_img_up;
+	void			*enemy_img_down;
+	void			*enemy_img_right;
+	void			*enemy_img_left;
 	t_player_pos	player_pos;
+	t_anim			*anim;
 }					t_data;
 
 // init
@@ -100,7 +117,6 @@ int		key_hook(int keysym, t_data *game);
 void	update_player_move(t_data *game, int key);
 void	door_locked_up_down(t_data *game, int door_row,	int door_col);
 void	door_locked_right_left(t_data *game, int door_row, int door_col);
-void	print_foot(int key, t_data *game);
 
 // Closing game
 int		close_game(t_data *game);
@@ -115,5 +131,14 @@ int		is_down(int key);
 int		is_left(int key);
 int		is_right(int key);
 int		is_valid_char(int key);
+
+// bonus
+void	display_moves(t_data *game);
+int		init_animation(t_data *game);
+void	init_enemy(t_data *game);
+int		combined_loop(t_data *game);
+int		anim_loop(t_data *game);
+int		enemy_loop(t_data *game);
+void	find_enemies(t_data *game);
 
 #endif

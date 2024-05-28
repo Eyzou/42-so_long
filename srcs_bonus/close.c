@@ -6,11 +6,11 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 17:24:52 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/28 10:20:51 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/28 10:45:49 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes_bonus/so_long_bonus.h"
 
 void	free_map(t_data *game)
 {
@@ -27,6 +27,9 @@ void	free_map(t_data *game)
 
 void	free_img(t_data *game)
 {
+	int	i;
+
+	i = 0;
 	mlx_destroy_image(game->mlx, game->collectible_img);
 	mlx_destroy_image(game->mlx, game->floor_img);
 	mlx_destroy_image(game->mlx, game->wall_img);
@@ -35,6 +38,15 @@ void	free_img(t_data *game)
 	mlx_destroy_image(game->mlx, game->player_img_down);
 	mlx_destroy_image(game->mlx, game->player_img_left);
 	mlx_destroy_image(game->mlx, game->player_img_right);
+	mlx_destroy_image(game->mlx, game->enemy_img_up);
+	mlx_destroy_image(game->mlx, game->enemy_img_down);
+	mlx_destroy_image(game->mlx, game->enemy_img_left);
+	mlx_destroy_image(game->mlx, game->enemy_img_right);
+	while (i < NUM_FRAMES)
+	{
+		mlx_destroy_image(game->mlx, game->anim->sprites[i]);
+		i++;
+	}
 }
 
 int	close_game(t_data *game)
@@ -44,6 +56,7 @@ int	close_game(t_data *game)
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
+	free(game->anim);
 	free(game);
 	exit(0);
 	return (0);

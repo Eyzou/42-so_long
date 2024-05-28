@@ -6,11 +6,11 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 17:59:03 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/28 10:21:11 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/28 10:45:58 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes_bonus/so_long_bonus.h"
 
 void	*get_images(t_data *game, char *path)
 {
@@ -38,6 +38,10 @@ void	set_images(t_data *game)
 	game->player_img_down = get_images(game, PLAYER_DOWN_PATH);
 	game->player_img_left = get_images(game, PLAYER_LEFT_PATH);
 	game->player_img_right = get_images(game, PLAYER_RIGHT_PATH);
+	game->enemy_img_up = get_images(game, ENEMY_UP_PATH);
+	game->enemy_img_down = get_images(game, ENEMY_DOWN_PATH);
+	game->enemy_img_left = get_images(game, ENEMY_LEFT_PATH);
+	game->enemy_img_right = get_images(game, ENEMY_RIGHT_PATH);
 }
 
 static void	print_map(char *line, t_data *game, int index)
@@ -54,9 +58,12 @@ static void	print_map(char *line, t_data *game, int index)
 		else if (line[i] == 'C' || line[i] == 'c')
 			put_image(game, game->collectible_img, i, index);
 		else if (line[i] == 'e')
-			put_image(game, game->door_img, i, index);
+			put_image(game, game->anim->sprites[game->anim->current_frame], i,
+				index);
 		else if (line[i] == 'P')
 			put_player(game, i, index);
+		else if (line[i] == 'M' || line[i] == 'm')
+			put_image(game, game->enemy_img_down, i, index);
 		i++;
 	}
 }

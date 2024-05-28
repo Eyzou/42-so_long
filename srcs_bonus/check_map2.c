@@ -6,11 +6,11 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 10:12:20 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/28 12:13:28 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/28 11:39:09 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes_bonus/so_long_bonus.h"
 
 static void	dfs_matrix(int x, int y, char **map)
 {
@@ -18,6 +18,8 @@ static void	dfs_matrix(int x, int y, char **map)
 		map[y][x] = '2';
 	if (map[y][x] == 'C')
 		map[y][x] = 'c';
+	if (map[y][x] == 'M')
+		map[y][x] = 'm';
 	if (map[y][x] == 'E')
 	{
 		map[y][x] = 'e';

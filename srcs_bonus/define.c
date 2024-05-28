@@ -6,11 +6,11 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 16:26:31 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/28 10:22:09 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/28 10:45:51 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes_bonus/so_long_bonus.h"
 
 int	is_up(int key)
 {
@@ -34,5 +34,5 @@ int	is_right(int key)
 
 int	is_valid_char(int key)
 {
-	return (key == 'C' || key == 'E' || key == '0' || key == 'P' );
+	return (key == 'C' || key == 'E' || key == '0' || key == 'P' || key == 'M');
 }
