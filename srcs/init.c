@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 11:03:12 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/28 11:14:51 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/28 12:28:01 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init_mlx(t_data *game)
 int	init_game(t_data *game, char **argv)
 {
 	check_ber(argv[1], game);
-	game->moves = 0;
+	game->moves = 1;
 	game->player_direction = 0;
 	game->score = 0;
 	game->colls_num = 0;

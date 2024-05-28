@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:20:48 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/28 10:45:44 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/28 12:36:15 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	anim_loop(t_data *game)
 	int	current_time;
 
 	current_time = clock();
-	if (current_time - game->anim->last_time > 600000)
+	if (current_time - game->anim->last_time > 55000)
 	{
 		game->anim->current_frame++;
 		if (game->anim->current_frame >= NUM_FRAMES)

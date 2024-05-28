@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:23:00 by ehamm             #+#    #+#             */
-/*   Updated: 2024/05/28 10:45:56 by ehamm            ###   ########.fr       */
+/*   Updated: 2024/05/28 12:35:11 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	enemy_loop(t_data *game)
 	random2 = (rand() % 2);
 	if (random1 == 0)
 		random1 = -1;
-	delay = 5500;
+	delay = 20000;
 	game->enemy = game->loop % delay;
 	if (game->enemy == 0)
 	{
