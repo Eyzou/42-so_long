@@ -1,5 +1,5 @@
 
-# so_long by Eyou
+# so_long by Eyzou
 
 ## Overview
 
