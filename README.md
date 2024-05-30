@@ -22,7 +22,7 @@ To run the `so_long` project, you need the following:
 
 - A Unix-like operating system (Linux or macOS). I have added both options in the Makefile - feel free to uncomment.
 - The MiniLibX library installed on your system.
-- A C compiler (gcc or clang).
+- A C compiler.
 
 ### Installation
 
